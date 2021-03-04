@@ -1,0 +1,5 @@
+<div class="row">
+    <ul *ngFor="let ppm of ppms">
+        <li>{{ppm.id}} {{ppm.ppmStatusId}} {{ppm.ppmStatusName}} {{ppm.ppmTypeId}} {{ppm.ppmTypeName}}<button class="btn btn-success mr-2" routerLink="/ppmdetails/{{ppm.id}}">Get PPM Details</button></li>
+    </ul>
+</div>

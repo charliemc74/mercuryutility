@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<a class="navbar-brand" routerLink="/" routerLinkActive='active'>Mercury Utilities</a>
+ <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <ng-container *ngIf="loginService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ppmsummary" routerLinkActive='active'>PPM Check</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ppmdetails" routerLinkActive='active'>PPM Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/logs" routerLinkActive='active'>Application Logs</a>
+        </li>        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/errors" routerLinkActive='active'>Test Errors</a>
+        </li>      
+      </ng-container>
+    </ul>
+  
+    <div class="dropdown" *ngIf="(loginService.currentUser$ | async) as loggedInUser" dropdown>
+       <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{loggedInUser.userName | titlecase}}</a>
+       <div class="dropdown-menu mt-3" *dropdownMenu>
+         <a class="dropdown-item">Edit Profile</a>
+         <div class="dropdown-divider"></div>
+         <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </div>
+
+    <div class="logincontainer">
+    <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()" autocomplete="off" *ngIf="(loginService.currentUser$ | async) === null" class="navbar-nav fl">
+      <input class="form-control mr-sm-2" type="text" placeholder="Username" [(ngModel)]="loginModel.username" name="username" />
+      <input
+        class="form-control mr-sm-2"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="loginModel.password"
+        name="password"
+      />
+      <button class="btn btn-success my-2 my-sm-0" type="submit">
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+</nav>
